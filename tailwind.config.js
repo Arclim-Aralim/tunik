@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "media",
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
@@ -7,7 +8,7 @@ export default {
         cream: "#fffafc",
         lavender: "#E9DEFC",
         violet: "#9663D9",
-        ink: "#0E505C",
+        ink: "#083D49",
         mint: "#6AD2B7",
       },
       boxShadow: {
@@ -16,8 +17,18 @@ export default {
       },
       fontFamily: {
         sans: [
-          "Inter",
+          "Montserrat",
+          "Segoe UI Variable",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "sans-serif",
+        ],
+        display: [
           "Montserrat Alternates",
+          "Montserrat",
+          "Segoe UI Variable",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",

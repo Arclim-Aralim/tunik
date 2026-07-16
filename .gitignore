@@ -1,3 +1,8 @@
 node_modules/
 .DS_Store
 *.log
+*.txt
+localhostrun_ed25519*
+vite-*.txt
+bin/
+obj/
