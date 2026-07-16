@@ -1295,11 +1295,12 @@
   }
 
   .t-graph {
-    @apply p-3.5;
+    @apply overflow-x-auto overflow-y-hidden p-3.5;
+    scrollbar-width: thin;
   }
 
   .discipline-axis {
-    @apply gap-1.5 text-[0.8rem];
+    @apply min-w-[520px] gap-1.5 text-[0.8rem];
   }
 
   .discipline-axis strong::before,
@@ -1308,24 +1309,24 @@
   }
 
   .graph-stage {
-    @apply relative mt-3 min-h-[322px] pr-8;
+    @apply relative mt-3 min-h-[322px] min-w-[520px] pr-8;
   }
 
   .bars {
-    @apply h-[306px] grid-cols-[0.78fr_0.78fr_1.25fr_0.78fr_0.78fr] gap-1;
+    @apply h-[306px] grid-cols-[1fr_1fr_1.35fr_1fr_1fr] gap-2;
   }
 
   .specialization-bar {
-    @apply px-1.5 py-2;
+    @apply px-2 py-2;
   }
 
   .specialization-bar strong {
-    @apply text-[0.56rem] leading-[1.08];
+    @apply text-[0.68rem] leading-[1.1];
     overflow-wrap: anywhere;
   }
 
   .specialization-bar span {
-    @apply mt-1 text-[0.48rem];
+    @apply mt-1.5 text-[0.56rem];
   }
 
   .specialization-bar.crossbar {
