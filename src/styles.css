@@ -1295,11 +1295,11 @@
   }
 
   .t-graph {
-    @apply p-3;
+    @apply p-3.5;
   }
 
   .discipline-axis {
-    @apply gap-1 text-sm;
+    @apply gap-1.5 text-[0.8rem];
   }
 
   .discipline-axis strong::before,
@@ -1308,46 +1308,46 @@
   }
 
   .graph-stage {
-    @apply mt-3 min-h-[322px] pr-8;
+    @apply mt-3 min-h-0 pr-0;
   }
 
   .bars {
-    @apply h-[306px] grid-cols-[0.78fr_0.78fr_1.25fr_0.78fr_0.78fr] gap-1;
+    @apply h-auto grid-cols-2 gap-2;
   }
 
   .specialization-bar {
-    @apply px-1.5 py-2;
+    @apply min-h-[96px] px-2 py-2.5;
   }
 
   .specialization-bar strong {
-    @apply text-[0.56rem] leading-[1.08];
+    @apply text-[0.72rem] leading-[1.08];
     overflow-wrap: anywhere;
   }
 
   .specialization-bar span {
-    @apply mt-1 text-[0.48rem];
+    @apply mt-1 text-[0.6rem];
   }
 
   .specialization-bar.crossbar {
-    @apply h-[92px];
+    @apply min-h-[96px];
   }
 
   .specialization-bar.deep {
-    @apply h-[292px];
+    @apply col-span-2 min-h-[158px];
   }
 
   .depth-axis {
-    @apply bottom-2 right-0 top-[86px] w-6;
+    @apply static mt-3 flex w-full items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-2 text-white/75;
   }
 
   .depth-axis::before {
-    @apply bottom-7 top-7;
+    @apply hidden;
   }
 
   .depth-axis strong {
-    @apply w-auto max-w-none px-1 py-2 text-[0.68rem];
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    @apply w-auto max-w-none bg-transparent px-0 py-0 text-[0.72rem] font-extrabold leading-tight tracking-[0.18em];
+    writing-mode: horizontal-tb;
+    transform: none;
   }
 }
 
