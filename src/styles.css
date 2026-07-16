@@ -1291,8 +1291,12 @@
 
 @media (max-width: 620px) {
   .hero {
-    @apply min-h-0 pb-12 pt-12;
+    @apply min-h-0 pb-10 pt-6;
     min-height: calc(100svh - 72px);
+  }
+
+  .hero-centered {
+    @apply content-start;
   }
 
   .hero-centered .hero-copy {
