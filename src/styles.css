@@ -1291,12 +1291,12 @@
 
 @media (max-width: 620px) {
   .hero {
-    @apply min-h-0 pb-10 pt-6;
-    min-height: calc(100svh - 72px);
+    @apply min-h-0 pb-8 pt-5;
+    min-height: 0;
   }
 
   .hero-centered {
-    @apply content-start;
+    @apply place-items-start;
   }
 
   .hero-centered .hero-copy {
