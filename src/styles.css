@@ -1291,7 +1291,32 @@
 
 @media (max-width: 620px) {
   .hero {
-    @apply pb-14;
+    @apply min-h-0 pb-12 pt-12;
+    min-height: calc(100svh - 72px);
+  }
+
+  .hero-centered .hero-copy {
+    @apply px-0;
+  }
+
+  .hero h1 {
+    @apply w-full max-w-[320px] text-[2.55rem] leading-[0.98];
+  }
+
+  .hero h1 span {
+    @apply whitespace-normal;
+  }
+
+  .hero-text {
+    @apply mt-5 max-w-[320px] text-[0.92rem] leading-[1.55];
+  }
+
+  .hero-actions {
+    @apply mt-6 gap-2.5;
+  }
+
+  .button {
+    @apply min-h-11 px-4 py-2 text-[0.88rem];
   }
 
   .t-graph {
