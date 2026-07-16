@@ -247,14 +247,6 @@ export function SpecialtyQuiz() {
             {aiStatus === "ready" && `Уверенность: ${Math.round(aiRecommendation.confidence * 100)}%`}
           </div>
 
-          {aiRecommendation?.reasons?.length > 0 && (
-            <ul className="ai-reasons">
-              {aiRecommendation.reasons.map((reason) => (
-                <li key={reason}>{reason}</li>
-              ))}
-            </ul>
-          )}
-
           <div className="quiz-result-actions">
             {result ? (
               <Link to={`/program/${result.id}`}>Открыть программу</Link>
