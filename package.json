@@ -6,7 +6,7 @@
   "scripts": {
   "dev": "vite --host",
   "api": "dotnet run --project backend/QuizAi.Api",
-  "build": "vite build",
+  "build": "vite build --base=/tunik/",
   "build:api": "dotnet build backend/QuizAi.Api",
   "preview": "vite preview --host"
   },
