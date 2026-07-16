@@ -2,7 +2,9 @@ node_modules/
 .DS_Store
 *.log
 *.txt
+*.tar.gz
 localhostrun_ed25519*
 vite-*.txt
 bin/
 obj/
+.openai/
