@@ -1,6 +1,12 @@
-const API_URL = import.meta.env.VITE_QUIZ_AI_URL ?? "http://localhost:5087/api/recommend";
+const API_URL = import.meta.env.VITE_QUIZ_AI_URL?.trim() ?? "";
+
+export const hasQuizAiEndpoint = Boolean(API_URL);
 
 export async function requestQuizRecommendation(answers) {
+  if (!API_URL) {
+    throw new Error("Quiz AI endpoint is not configured");
+  }
+
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {

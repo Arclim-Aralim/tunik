@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { programs, quizQuestions } from "../data/siteData";
-import { requestQuizRecommendation } from "../services/quizAi";
+import { hasQuizAiEndpoint, requestQuizRecommendation } from "../services/quizAi";
 
 const TRAIT_ORDER = [
   "engineering",
@@ -101,6 +101,12 @@ export function SpecialtyQuiz() {
     if (!answeredCount) {
       setAiRecommendation(null);
       setAiStatus("idle");
+      return;
+    }
+
+    if (!hasQuizAiEndpoint) {
+      setAiRecommendation(null);
+      setAiStatus("offline");
       return;
     }
 
