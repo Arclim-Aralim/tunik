@@ -1290,11 +1290,26 @@
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1280px) {
   .t-graph {
     @apply overflow-x-auto overflow-y-hidden pb-5;
     scrollbar-width: thin;
+    scrollbar-color: rgba(106, 210, 183, 0.75) rgba(255, 255, 255, 0.12);
     overscroll-behavior-x: contain;
+  }
+
+  .t-graph::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .t-graph::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+
+  .t-graph::-webkit-scrollbar-thumb {
+    background: rgba(106, 210, 183, 0.75);
+    border-radius: 999px;
   }
 
   .discipline-axis,
