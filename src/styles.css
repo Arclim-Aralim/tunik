@@ -490,11 +490,11 @@
   }
 
   .graph-stage {
-    @apply relative mt-4 min-h-[clamp(300px,38vw,440px)] pr-[clamp(82px,10vw,124px)];
+    @apply relative mt-4 grid min-h-[clamp(300px,38vw,440px)] grid-cols-[minmax(0,1fr)_clamp(76px,9vw,110px)];
   }
 
   .bars {
-    @apply grid h-[clamp(280px,36vw,410px)] grid-cols-[1fr_1fr_1.35fr_1fr_1fr] items-start gap-[clamp(6px,1.25vw,14px)];
+    @apply col-start-1 grid min-w-0 h-[clamp(280px,36vw,410px)] grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.35fr)_minmax(0,1fr)_minmax(0,1fr)] items-start gap-[clamp(6px,1.25vw,14px)];
   }
 
   .specialization-bar {
@@ -538,7 +538,9 @@
   }
 
   .depth-axis {
-    @apply absolute bottom-2 right-0 top-[clamp(88px,12vw,136px)] flex w-[clamp(76px,9vw,110px)] flex-col items-center justify-between text-center text-white/90;
+    @apply relative col-start-2 flex w-full flex-col items-center justify-between self-stretch text-center text-white/90;
+    margin-top: clamp(88px, 12vw, 136px);
+    margin-bottom: 0.5rem;
   }
 
   .depth-axis::before {
@@ -1390,7 +1392,7 @@
   }
 
   .graph-stage {
-    @apply pr-[104px];
+    @apply pr-0;
   }
 
   .bars {
@@ -1467,11 +1469,11 @@
   }
 
   .graph-stage {
-    @apply relative mt-3 min-h-[322px] min-w-[520px] pr-8;
+    @apply relative mt-3 min-h-[322px] min-w-[520px] grid-cols-[minmax(0,1fr)_2rem] pr-0;
   }
 
   .bars {
-    @apply h-[306px] grid-cols-[1fr_1fr_1.35fr_1fr_1fr] gap-2;
+    @apply h-[306px] grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.35fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2;
   }
 
   .specialization-bar {
@@ -1496,7 +1498,9 @@
   }
 
   .depth-axis {
-    @apply absolute bottom-2 right-0 top-[86px] w-6;
+    @apply relative w-full;
+    margin-top: 86px;
+    margin-bottom: 0.5rem;
   }
 
   .depth-axis::before {
