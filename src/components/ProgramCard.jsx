@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRightIcon } from "../icons/AppIcons";
 
 export function ProgramCard({ program }) {
   const Icon = program.icon;
   return (
-    <motion.article className={`program-card ${program.tone}`} whileHover={{ y: -8 }}>
+    <article className={`program-card ${program.tone}`}>
       <div className="card-top">
         <span className="icon"><Icon size={24} /></span>
         <span className="tag">{program.tag}</span>
@@ -24,6 +23,6 @@ export function ProgramCard({ program }) {
           <ArrowRightIcon size={18} />
         </Link>
       </div>
-    </motion.article>
+    </article>
   );
 }

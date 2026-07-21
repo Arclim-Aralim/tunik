@@ -1,8 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import gsap from "gsap";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import {
   instituteBenefits,
   learningSpaces,
@@ -17,7 +14,6 @@ import { ArrowRightIcon } from "../icons/AppIcons";
 
 export function HomePage() {
   const [query, setQuery] = useState("");
-  const [parent] = useAutoAnimate();
   const location = useLocation();
 
   const filteredPrograms = useMemo(() => {
@@ -56,64 +52,51 @@ export function HomePage() {
   }, [location.hash, location.state]);
 
   useEffect(() => {
-    const items = gsap.utils.toArray(".reveal");
-    const triggers = items.map((item) =>
-      gsap.fromTo(
-        item,
-        { y: 36, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: { trigger: item, start: "top 82%" },
-        },
-      ),
+    const items = [...document.querySelectorAll(".reveal")];
+
+    if (!("IntersectionObserver" in window)) {
+      items.forEach((item) => item.classList.add("is-visible"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -16% 0px", threshold: 0 },
     );
-    return () => triggers.forEach((trigger) => trigger.scrollTrigger?.kill());
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   }, []);
 
   return (
     <>
       <section className="hero hero-centered">
         <div className="hero-copy">
-          <motion.p
-            className="eyebrow"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+          <p className="eyebrow hero-intro hero-intro-0">
             Институт сквозных технологий ДГТУ
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08 }}
-          >
+          </p>
+          <h1 className="hero-intro hero-intro-1">
             <span>Т-университет</span>
-          </motion.h1>
-          <motion.p
-            className="hero-text"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.16 }}
-          >
+          </h1>
+          <p className="hero-text hero-intro hero-intro-2">
             Образовательное пространство с персональными учебными сценариями, авторскими
             курсами практиков и программами, собранными вокруг ключевых технологических
             трендов.
-          </motion.p>
-          <motion.div
-            className="hero-actions"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.24 }}
-          >
+          </p>
+          <div className="hero-actions hero-intro hero-intro-3">
             <SectionNavButton className="button primary" sectionId="programs">
               Направления <ArrowRightIcon size={18} />
             </SectionNavButton>
             <SectionNavButton className="button ghost" sectionId="model">
               Модель обучения
             </SectionNavButton>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -189,11 +172,9 @@ export function HomePage() {
 
         <div className="task-grid">
           {tasks.map((task, index) => (
-            <motion.div
-              className="task"
+            <div
+              className="task lift-on-hover"
               key={task.title}
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>
@@ -201,7 +182,7 @@ export function HomePage() {
                 <br />
                 {task.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -278,15 +259,13 @@ export function HomePage() {
 
         <div className="benefit-grid">
           {instituteBenefits.map((benefit, index) => (
-            <motion.article
-              className="benefit-card"
+            <article
+              className="benefit-card lift-on-hover"
               key={benefit}
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>{benefit}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
 
@@ -324,7 +303,7 @@ export function HomePage() {
             />
           </label>
         </div>
-        <div className="program-grid" ref={parent}>
+        <div className="program-grid">
           {filteredPrograms.map((program) => (
             <ProgramCard key={program.id} program={program} />
           ))}

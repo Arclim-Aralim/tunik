@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
 import { programs } from "../data/siteData";
 import { ArrowLeftIcon } from "../icons/AppIcons";
 
@@ -10,12 +9,7 @@ export function ProgramPage() {
   const Icon = program.icon;
 
   return (
-    <motion.main
-      className="program-page"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
+    <main className="program-page route-enter">
       <Link className="back-link" to="/" state={{ scrollTarget: "programs" }}>
         <ArrowLeftIcon size={18} /> К направлениям
       </Link>
@@ -55,6 +49,6 @@ export function ProgramPage() {
           ))}
         </div>
       </section>
-    </motion.main>
+    </main>
   );
 }

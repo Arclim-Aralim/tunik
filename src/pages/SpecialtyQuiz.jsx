@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { programs, quizQuestions } from "../data/siteData";
 import { hasQuizAiEndpoint, requestQuizRecommendation } from "../services/quizAi";
@@ -168,7 +167,7 @@ export function SpecialtyQuiz() {
   }, [hasAnswers, topTraits]);
 
   return (
-    <section className="section quiz-section reveal" id="quiz">
+    <section className="section quiz-section" id="quiz">
       <div className="section-heading split">
         <div>
           <p className="eyebrow">Мини-тест</p>
@@ -229,11 +228,9 @@ export function SpecialtyQuiz() {
                     <strong>{trait.value}%</strong>
                   </div>
                   <div className="quiz-trait-track">
-                    <motion.span
+                    <span
                       className="quiz-trait-fill"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: Math.max(trait.value / 100, 0.08) }}
-                      transition={{ duration: 0.9, ease: "easeOut" }}
+                      style={{ width: `${Math.max(trait.value, 8)}%` }}
                     />
                   </div>
                 </div>

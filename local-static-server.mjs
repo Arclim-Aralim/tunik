@@ -4,6 +4,7 @@ import { extname, join, normalize, resolve } from "node:path";
 
 const root = resolve("dist");
 const port = Number(process.argv[2] || 4174);
+const basePath = "/tunik/";
 
 const types = {
   ".css": "text/css; charset=utf-8",
@@ -18,7 +19,8 @@ const types = {
 
 function assetPath(url) {
   const pathname = decodeURIComponent(new URL(url, "http://local").pathname);
-  const candidate = resolve(root, normalize(pathname).replace(/^[/\\]+/, ""));
+  const relativePath = pathname.startsWith(basePath) ? pathname.slice(basePath.length) : pathname;
+  const candidate = resolve(root, normalize(relativePath).replace(/^[/\\]+/, ""));
   return candidate.startsWith(root) ? candidate : join(root, "index.html");
 }
 

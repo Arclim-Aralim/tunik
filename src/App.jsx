@@ -1,37 +1,66 @@
-import React from "react";
+import React, { lazy, Suspense, useEffect, useRef } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CyberCircuit } from "./components/CyberCircuit";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Header } from "./components/Header";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
-import { HomePage } from "./pages/HomePage";
-import { ProgramPage } from "./pages/ProgramPage";
-import { SpecialtyQuiz } from "./pages/SpecialtyQuiz";
 
-gsap.registerPlugin(ScrollTrigger);
+const HomePage = lazy(() => import("./pages/HomePage").then(({ HomePage: page }) => ({ default: page })));
+const ProgramPage = lazy(() =>
+  import("./pages/ProgramPage").then(({ ProgramPage: page }) => ({ default: page })),
+);
+const SpecialtyQuiz = lazy(() =>
+  import("./pages/SpecialtyQuiz").then(({ SpecialtyQuiz: page }) => ({ default: page })),
+);
+
+function ScrollProgress() {
+  const progressRef = useRef(null);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      progressRef.current?.style.setProperty("transform", `scaleX(${progress})`);
+    };
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return <div ref={progressRef} className="progress" aria-hidden="true" />;
+}
 
 export default function App() {
   useSmoothScroll();
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
 
   return (
     <div className="app">
-      <motion.div className="progress" style={{ scaleX }} />
+      <ScrollProgress />
       <CyberCircuit />
       <Header />
       <ErrorBoundary>
-        <AnimatePresence mode="wait">
+        <Suspense fallback={<div className="route-loading" role="status">Загрузка…</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/quiz" element={<SpecialtyQuiz />} />
             <Route path="/program/:id" element={<ProgramPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
-        </AnimatePresence>
+        </Suspense>
       </ErrorBoundary>
       <footer className="footer">
         <span>Т-университет · Институт сквозных технологий ДГТУ</span>
