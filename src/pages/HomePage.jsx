@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   instituteBenefits,
@@ -14,6 +14,9 @@ import { ArrowRightIcon } from "../icons/AppIcons";
 
 export function HomePage() {
   const [query, setQuery] = useState("");
+  const [displayedPrograms, setDisplayedPrograms] = useState(programs);
+  const [areProgramsVisible, setAreProgramsVisible] = useState(true);
+  const isInitialProgramFilter = useRef(true);
   const location = useLocation();
 
   const filteredPrograms = useMemo(() => {
@@ -34,6 +37,32 @@ export function HomePage() {
         .includes(normalized),
     );
   }, [query]);
+
+  useEffect(() => {
+    if (isInitialProgramFilter.current) {
+      isInitialProgramFilter.current = false;
+      return undefined;
+    }
+
+    setAreProgramsVisible(false);
+
+    let firstFrame;
+    let secondFrame;
+    const swapTimer = window.setTimeout(() => {
+      setDisplayedPrograms(filteredPrograms);
+      firstFrame = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(() => {
+          setAreProgramsVisible(true);
+        });
+      });
+    }, 220);
+
+    return () => {
+      window.clearTimeout(swapTimer);
+      if (firstFrame) window.cancelAnimationFrame(firstFrame);
+      if (secondFrame) window.cancelAnimationFrame(secondFrame);
+    };
+  }, [filteredPrograms]);
 
   useEffect(() => {
     const sectionId = location.state?.scrollTarget ?? location.hash.slice(1);
@@ -304,10 +333,11 @@ export function HomePage() {
           </label>
         </div>
         <div
-          className="program-grid search-results"
-          key={query.trim().toLowerCase() || "all-programs"}
+          className={`program-grid search-results ${areProgramsVisible ? "is-visible" : "is-changing"}`}
+          aria-live="polite"
+          aria-busy={!areProgramsVisible}
         >
-          {filteredPrograms.map((program) => (
+          {displayedPrograms.map((program) => (
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>

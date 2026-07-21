@@ -735,20 +735,17 @@
     @apply grid grid-cols-4 gap-5 max-[1180px]:grid-cols-2 max-[620px]:grid-cols-1;
   }
 
-  .search-results .program-card {
-    animation: search-result-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .search-results {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .search-results .program-card:nth-child(2) {
-    animation-delay: 35ms;
-  }
-
-  .search-results .program-card:nth-child(3) {
-    animation-delay: 70ms;
-  }
-
-  .search-results .program-card:nth-child(n + 4) {
-    animation-delay: 105ms;
+  .search-results.is-changing {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
   }
 
   .program-card {
@@ -1342,18 +1339,6 @@
     opacity: 0;
     transform: translate3d(0, 20px, 0);
   }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes search-result-enter {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0) scale(0.985);
-  }
-
   to {
     opacity: 1;
     transform: none;
