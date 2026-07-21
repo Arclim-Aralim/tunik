@@ -498,15 +498,19 @@
   }
 
   .specialization-bar {
-    @apply flex w-full flex-col items-center justify-start rounded-sm p-[clamp(7px,1.1vw,14px)] text-center shadow-[0_18px_35px_rgba(0,0,0,0.18)];
+    @apply flex min-w-0 w-full flex-col items-center justify-start rounded-sm p-[clamp(7px,1.1vw,14px)] text-center shadow-[0_18px_35px_rgba(0,0,0,0.18)];
   }
 
   .specialization-bar strong {
-    @apply text-[clamp(0.62rem,1.35vw,0.95rem)] font-extrabold leading-[1.12] text-white;
+    @apply block min-w-0 w-full max-w-full text-[clamp(0.62rem,1.35vw,0.95rem)] font-extrabold leading-[1.12] text-white;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 
   .specialization-bar span {
-    @apply mt-2 text-[clamp(0.52rem,1vw,0.76rem)] font-bold leading-[1.15] text-white/80;
+    @apply mt-2 block min-w-0 w-full max-w-full text-[clamp(0.52rem,1vw,0.76rem)] font-bold leading-[1.15] text-white/80;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 
   .specialization-bar.crossbar {
@@ -1509,12 +1513,11 @@
   }
 
   .specialization-bar strong {
-    @apply text-[0.68rem] leading-[1.1];
-    overflow-wrap: anywhere;
+    @apply text-[0.64rem] leading-[1.08];
   }
 
   .specialization-bar span {
-    @apply mt-1.5 text-[0.56rem];
+    @apply mt-1.5 text-[0.52rem] leading-[1.1];
   }
 
   .specialization-bar.crossbar {
