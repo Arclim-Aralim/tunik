@@ -303,7 +303,10 @@ export function HomePage() {
             />
           </label>
         </div>
-        <div className="program-grid">
+        <div
+          className="program-grid search-results"
+          key={query.trim().toLowerCase() || "all-programs"}
+        >
           {filteredPrograms.map((program) => (
             <ProgramCard key={program.id} program={program} />
           ))}
