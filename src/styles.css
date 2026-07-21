@@ -508,15 +508,16 @@
   }
 
   .space-grid {
-    @apply grid grid-cols-3 gap-5 max-[1080px]:grid-cols-1;
+    @apply grid grid-cols-[repeat(3,minmax(0,1fr))] gap-5 max-[1220px]:grid-cols-1;
   }
 
   .space-card {
-    @apply rounded-lg border border-ink/10 bg-white/85 p-6 text-ink shadow-[0_18px_52px_rgba(14,80,92,0.08)];
+    @apply min-w-0 rounded-lg border border-ink/10 bg-white/85 p-6 text-ink shadow-[0_18px_52px_rgba(14,80,92,0.08)];
   }
 
   .space-card h3 {
-    @apply text-[clamp(1.6rem,3vw,2.45rem)] leading-[1.05];
+    @apply max-w-full text-[clamp(1.45rem,2.25vw,2.15rem)] leading-[1.08];
+    overflow-wrap: break-word;
   }
 
   .space-card p {
@@ -1286,6 +1287,39 @@
   50% {
     background-position: 120% 0, 0 0;
     opacity: 0.76;
+  }
+}
+
+@media (max-width: 980px) {
+  .t-graph {
+    @apply overflow-x-auto overflow-y-hidden pb-5;
+    scrollbar-width: thin;
+    overscroll-behavior-x: contain;
+  }
+
+  .discipline-axis,
+  .graph-stage {
+    @apply min-w-[640px];
+  }
+
+  .graph-stage {
+    @apply pr-[104px];
+  }
+
+  .bars {
+    @apply gap-3;
+  }
+
+  .specialization-bar strong {
+    @apply text-[0.82rem];
+  }
+
+  .specialization-bar span {
+    @apply text-[0.64rem];
+  }
+
+  .space-card h3 {
+    @apply text-[clamp(1.55rem,5vw,2.1rem)];
   }
 }
 
